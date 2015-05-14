@@ -32,12 +32,11 @@ public class DockingStationTest {
     assertSame(1, dockingStation.bikeCount());
   }
 
-  // @Test
-  // public void canReleaseABike() {
-  //   dockingStation.dock(bike);
-  //   assertSame(1, dockingStation.bikeCount());
-  //   dockingStation.release(bike);
-  //   assertSame(0, dockingStation.bikeCount());
-  // }
+  @Test
+  public void canReleaseABike() {
+    dockingStation.dock(bike);
+    dockingStation.release(bike);
+    assertSame(0, dockingStation.bikeCount());
+  }
 
 }

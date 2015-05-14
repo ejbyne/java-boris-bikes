@@ -24,8 +24,27 @@ public class DockingStation {
     bikesSize ++;
   }
 
-  // public void release() {
+  public void release(Bike bike) {
+    int bikesIndex = find(bike);
+    if (bikesIndex != -1) {
+      remove(bikesIndex);
+    }
+  }
 
-  // }
+  private int find(Bike bike) {
+    for (int bikesIndex = 0; bikesIndex < bikesSize; bikesIndex ++) {
+      if (bikes[bikesIndex] == bike) {
+        return bikesIndex;
+      }
+    }
+    return -1;
+  }
+
+  private void remove(int position) {
+    for (int bikesIndex = position + 1; bikesIndex < bikesSize; bikesIndex ++) {
+      bikes[bikesIndex - 1] = bikes[bikesIndex];
+    }
+    bikesSize --;
+  }
 
 }
