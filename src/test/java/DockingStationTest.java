@@ -13,6 +13,12 @@ public class DockingStationTest {
     bike = new Bike();
   }
 
+  private void fillDockingStation() {
+    for (int i = 0; i < dockingStation.capacity(); i++) {
+      dockingStation.dock(bike);
+    }
+  }
+
   @Test
   public void hasDefaultCapacity() {
     dockingStation = new DockingStation();
@@ -37,6 +43,23 @@ public class DockingStationTest {
     dockingStation.dock(bike);
     dockingStation.release(bike);
     assertSame(0, dockingStation.bikeCount());
+  }
+
+  @Test
+  public void knowsWhenItIsFull() {
+    fillDockingStation();
+    assertTrue(dockingStation.isFull());
+  }
+
+  @Test
+  public void doesNotAcceptABikeIfItIsFull() {
+    fillDockingStation();
+    try {
+      dockingStation.dock(bike);
+      fail("Expected an IndexOutOfBoundsException to be thrown");
+    } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
+      assertSame("Docking station is full", anIndexOutOfBoundsException.getMessage());
+    }
   }
 
 }

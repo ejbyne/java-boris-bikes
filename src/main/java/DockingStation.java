@@ -19,7 +19,12 @@ public class DockingStation {
     return bikes.length;
   }
 
+  public boolean isFull() {
+    return bikesSize == bikes.length;
+  }
+
   public void dock(Bike bike) {
+    checkCapacity();
     bikes[bikesSize] = bike;
     bikesSize ++;
   }
@@ -28,6 +33,12 @@ public class DockingStation {
     int bikesIndex = find(bike);
     if (bikesIndex != -1) {
       remove(bikesIndex);
+    }
+  }
+
+  private void checkCapacity() {
+    if (isFull()) {
+      throw new IndexOutOfBoundsException("Docking station is full");
     }
   }
 
