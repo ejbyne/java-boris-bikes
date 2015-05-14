@@ -16,4 +16,17 @@ public class BikeTest {
     assertFalse(bike.isBroken());
   }
 
+  @Test
+  public void instanceCanBeBroken() {
+    bike.breakBike();
+    assertTrue(bike.isBroken());
+  }
+
+  @Test
+  public void instanceCanBeFixed() {
+    bike.breakBike();
+    bike.fixBike();
+    assertFalse(bike.isBroken());
+  }
+
 }
