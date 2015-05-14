@@ -17,13 +17,13 @@ public class BikeTest {
   }
 
   @Test
-  public void instanceCanBeBroken() {
+  public void canBeBroken() {
     bike.breakBike();
     assertTrue(bike.isBroken());
   }
 
   @Test
-  public void instanceCanBeFixed() {
+  public void canBeFixed() {
     bike.breakBike();
     bike.fixBike();
     assertFalse(bike.isBroken());
