@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BikeContainer {
 
   private Bike[] bikes;
@@ -34,6 +36,16 @@ public class BikeContainer {
     remove(bikesIndex);
   }
 
+  public ArrayList<Bike> availableBikes() {
+    boolean isBroken = false;
+    return selectedBikes(isBroken);
+  }
+
+  public ArrayList<Bike> unavailableBikes() {
+    boolean isBroken = true;
+    return selectedBikes(isBroken);
+  }
+
   private void checkCapacity() {
     if (isFull()) {
       throw new IndexOutOfBoundsException("Docking station is full");
@@ -54,6 +66,16 @@ public class BikeContainer {
       bikes[bikesIndex - 1] = bikes[bikesIndex];
     }
     bikesSize --;
+  }
+
+  private ArrayList<Bike> selectedBikes(boolean isBroken) {
+    ArrayList<Bike> selectedBikes = new ArrayList<Bike>();
+    for (int bikesIndex = 0; bikesIndex < bikesSize; bikesIndex ++) {
+      if (bikes[bikesIndex].isBroken() == isBroken) {
+        selectedBikes.add(bikes[bikesIndex]);
+      }
+    }
+    return selectedBikes;
   }
 
 }

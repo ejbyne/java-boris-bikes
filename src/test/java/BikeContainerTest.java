@@ -6,11 +6,14 @@ public class BikeContainerTest {
 
   private BikeContainer bikeContainer;
   private Bike bike;
+  private Bike brokenBike;
 
   @Before
   public void beforebikeContainerTest() {
     bikeContainer = new BikeContainer();
     bike = new Bike();
+    brokenBike = new Bike();
+    brokenBike.breakBike();
   }
 
   private void fillbikeContainer() {
@@ -71,6 +74,20 @@ public class BikeContainerTest {
     } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
       assertSame("Requested bike is not in docking station", anIndexOutOfBoundsException.getMessage());
     }
+  }
+
+  @Test
+  public void canIdentifyAvailableBikes() {
+    bikeContainer.dock(bike);
+    bikeContainer.dock(brokenBike);
+    assertSame(1, bikeContainer.availableBikes().size());
+  }
+
+  @Test
+  public void canIdentifyUnavailableBikes() {
+    bikeContainer.dock(bike);
+    bikeContainer.dock(brokenBike);
+    assertSame(1, bikeContainer.unavailableBikes().size());
   }
 
 }

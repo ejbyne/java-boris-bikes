@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Van {
 
   private BikeContainer bikeContainer;
@@ -28,6 +30,14 @@ public class Van {
 
   public void release(Bike bike) {
     bikeContainer.release(bike);
+  }
+
+  public ArrayList<Bike> availableBikes() {
+    return bikeContainer.availableBikes();
+  }
+
+  public ArrayList<Bike> unavailableBikes() {
+    return bikeContainer.unavailableBikes();
   }
 
 }
