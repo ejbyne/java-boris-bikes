@@ -1,4 +1,5 @@
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -10,8 +11,8 @@ public class GarageTest {
   @Before
   public void beforeGarageTest() {
     garage = new Garage();
-    bike = new Bike();
-    bike.breakBike();
+    bike = mock(Bike.class);
+    when(bike.isBroken()).thenReturn(true);
   }
 
   @Test
@@ -30,7 +31,7 @@ public class GarageTest {
     assertTrue(bike.isBroken());
     garage.dock(bike);
     garage.fixBikes();
-    assertFalse(bike.isBroken());
+    verify(bike).fixBike();
   }
 
 }
