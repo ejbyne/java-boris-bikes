@@ -1,4 +1,5 @@
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -11,9 +12,10 @@ public class BikeContainerTest {
   @Before
   public void beforebikeContainerTest() {
     bikeContainer = new BikeContainer();
-    bike = new Bike();
-    brokenBike = new Bike();
-    brokenBike.breakBike();
+    bike = mock(Bike.class);
+    brokenBike = mock(Bike.class);
+    when(bike.isBroken()).thenReturn(false);
+    when(brokenBike.isBroken()).thenReturn(true);
   }
 
   private void fillBikeContainer() {
@@ -66,7 +68,7 @@ public class BikeContainerTest {
 
   @Test
   public void doesNotReleaseABikeWhichIsNotThere() {
-    Bike missingBike = new Bike();
+    Bike missingBike = mock(Bike.class);
     bikeContainer.dock(bike);
     try {
       bikeContainer.release(missingBike);
