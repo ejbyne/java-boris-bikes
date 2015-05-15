@@ -31,9 +31,7 @@ public class DockingStation {
 
   public void release(Bike bike) {
     int bikesIndex = find(bike);
-    if (bikesIndex != -1) {
-      remove(bikesIndex);
-    }
+    remove(bikesIndex);
   }
 
   private void checkCapacity() {
@@ -48,7 +46,7 @@ public class DockingStation {
         return bikesIndex;
       }
     }
-    return -1;
+    throw new IndexOutOfBoundsException("Requested bike is not in docking station");
   }
 
   private void remove(int position) {

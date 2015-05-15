@@ -62,4 +62,16 @@ public class DockingStationTest {
     }
   }
 
+  @Test
+  public void doesNotReleaseABikeWhichIsNotThere() {
+    Bike missingBike = new Bike();
+    dockingStation.dock(bike);
+    try {
+      dockingStation.release(missingBike);
+      fail("Expected an IndexOutOfBoundsException to be thrown");
+    } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
+      assertSame("Requested bike is not in docking station", anIndexOutOfBoundsException.getMessage());
+    }
+  }
+
 }
