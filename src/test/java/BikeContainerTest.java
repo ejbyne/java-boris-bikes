@@ -16,7 +16,7 @@ public class BikeContainerTest {
     brokenBike.breakBike();
   }
 
-  private void fillbikeContainer() {
+  private void fillBikeContainer() {
     for (int i = 0; i < bikeContainer.capacity(); i++) {
       bikeContainer.dock(bike);
     }
@@ -49,13 +49,13 @@ public class BikeContainerTest {
 
   @Test
   public void knowsWhenItIsFull() {
-    fillbikeContainer();
+    fillBikeContainer();
     assertTrue(bikeContainer.isFull());
   }
 
   @Test
   public void doesNotAcceptABikeIfItIsFull() {
-    fillbikeContainer();
+    fillBikeContainer();
     try {
       bikeContainer.dock(bike);
       fail("Expected an IndexOutOfBoundsException to be thrown");
