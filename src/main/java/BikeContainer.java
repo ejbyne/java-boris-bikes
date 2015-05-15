@@ -1,13 +1,13 @@
-public class DockingStation {
+public class BikeContainer {
 
   private Bike[] bikes;
   private int bikesSize = 0;
 
-  public DockingStation() {
+  public BikeContainer() {
     bikes = new Bike[20];
   }
 
-  public DockingStation(int capacity) {
+  public BikeContainer(int capacity) {
     bikes = new Bike[capacity];
   }
 

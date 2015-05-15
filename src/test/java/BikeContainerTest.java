@@ -2,60 +2,59 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
-public class DockingStationTest {
+public class BikeContainerTest {
 
-  private DockingStation dockingStation;
+  private BikeContainer bikeContainer;
   private Bike bike;
 
   @Before
-  public void beforeDockingStationTest() {
-    dockingStation = new DockingStation();
+  public void beforebikeContainerTest() {
+    bikeContainer = new BikeContainer();
     bike = new Bike();
   }
 
-  private void fillDockingStation() {
-    for (int i = 0; i < dockingStation.capacity(); i++) {
-      dockingStation.dock(bike);
+  private void fillbikeContainer() {
+    for (int i = 0; i < bikeContainer.capacity(); i++) {
+      bikeContainer.dock(bike);
     }
   }
 
   @Test
   public void hasDefaultCapacity() {
-    dockingStation = new DockingStation();
-    assertSame(20, dockingStation.capacity());
+    assertSame(20, bikeContainer.capacity());
   }
 
   @Test
   public void canSetCapacity() {
-    dockingStation = new DockingStation(30);
-    assertSame(30, dockingStation.capacity());
+    bikeContainer = new BikeContainer(30);
+    assertSame(30, bikeContainer.capacity());
   }
 
   @Test
   public void canAcceptABike() {
-    assertSame(0, dockingStation.bikeCount());
-    dockingStation.dock(bike);
-    assertSame(1, dockingStation.bikeCount());
+    assertSame(0, bikeContainer.bikeCount());
+    bikeContainer.dock(bike);
+    assertSame(1, bikeContainer.bikeCount());
   }
 
   @Test
   public void canReleaseABike() {
-    dockingStation.dock(bike);
-    dockingStation.release(bike);
-    assertSame(0, dockingStation.bikeCount());
+    bikeContainer.dock(bike);
+    bikeContainer.release(bike);
+    assertSame(0, bikeContainer.bikeCount());
   }
 
   @Test
   public void knowsWhenItIsFull() {
-    fillDockingStation();
-    assertTrue(dockingStation.isFull());
+    fillbikeContainer();
+    assertTrue(bikeContainer.isFull());
   }
 
   @Test
   public void doesNotAcceptABikeIfItIsFull() {
-    fillDockingStation();
+    fillbikeContainer();
     try {
-      dockingStation.dock(bike);
+      bikeContainer.dock(bike);
       fail("Expected an IndexOutOfBoundsException to be thrown");
     } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
       assertSame("Docking station is full", anIndexOutOfBoundsException.getMessage());
@@ -65,9 +64,9 @@ public class DockingStationTest {
   @Test
   public void doesNotReleaseABikeWhichIsNotThere() {
     Bike missingBike = new Bike();
-    dockingStation.dock(bike);
+    bikeContainer.dock(bike);
     try {
-      dockingStation.release(missingBike);
+      bikeContainer.release(missingBike);
       fail("Expected an IndexOutOfBoundsException to be thrown");
     } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
       assertSame("Requested bike is not in docking station", anIndexOutOfBoundsException.getMessage());
