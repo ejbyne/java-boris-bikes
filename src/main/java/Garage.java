@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Garage {
+public class Garage implements Dockable {
 
   private BikeContainer bikeContainer;
 
@@ -37,6 +37,10 @@ public class Garage {
 
   public void release(Bike bike) {
     bikeContainer.release(bike);
+  }
+
+  public void transferTo(Dockable otherBikeDocker, ArrayList<Bike> selectedBikes) {
+    bikeContainer.transferTo(otherBikeDocker, selectedBikes);
   }
 
   public ArrayList<Bike> availableBikes() {

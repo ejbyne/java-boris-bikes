@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class BikeContainer {
+public class BikeContainer implements Dockable {
 
   private Bike[] bikes;
   private int bikesSize = 0;
@@ -36,6 +36,13 @@ public class BikeContainer {
     remove(bikesIndex);
   }
 
+  public void transferTo(Dockable otherBikeDocker, ArrayList<Bike> selectedBikes) {
+    for (int bikesIndex = selectedBikes.size() - 1; bikesIndex >= 0; bikesIndex --) {
+      otherBikeDocker.dock(selectedBikes.get(bikesIndex));
+      release(selectedBikes.get(bikesIndex));
+    }
+  }
+
   public ArrayList<Bike> availableBikes() {
     boolean isBroken = false;
     return selectedBikes(isBroken);
@@ -48,7 +55,7 @@ public class BikeContainer {
 
   private void checkCapacity() {
     if (isFull()) {
-      throw new IndexOutOfBoundsException("Docking station is full");
+      throw new IndexOutOfBoundsException("Bike container is full");
     }
   }
 
@@ -58,7 +65,7 @@ public class BikeContainer {
         return bikesIndex;
       }
     }
-    throw new IndexOutOfBoundsException("Requested bike is not in docking station");
+    throw new IndexOutOfBoundsException("Requested bike is not in bike container");
   }
 
   private void remove(int position) {

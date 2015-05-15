@@ -60,7 +60,7 @@ public class BikeContainerTest {
       bikeContainer.dock(bike);
       fail("Expected an IndexOutOfBoundsException to be thrown");
     } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
-      assertSame("Docking station is full", anIndexOutOfBoundsException.getMessage());
+      assertSame("Bike container is full", anIndexOutOfBoundsException.getMessage());
     }
   }
 
@@ -72,7 +72,7 @@ public class BikeContainerTest {
       bikeContainer.release(missingBike);
       fail("Expected an IndexOutOfBoundsException to be thrown");
     } catch(IndexOutOfBoundsException anIndexOutOfBoundsException) {
-      assertSame("Requested bike is not in docking station", anIndexOutOfBoundsException.getMessage());
+      assertSame("Requested bike is not in bike container", anIndexOutOfBoundsException.getMessage());
     }
   }
 
@@ -88,6 +88,15 @@ public class BikeContainerTest {
     bikeContainer.dock(bike);
     bikeContainer.dock(brokenBike);
     assertSame(1, bikeContainer.unavailableBikes().size());
+  }
+
+  @Test
+  public void canTransferSelectedBikesToOtherContainer() {
+    BikeContainer otherBikeContainer = new BikeContainer();
+    bikeContainer.dock(brokenBike);
+    bikeContainer.transferTo(otherBikeContainer, bikeContainer.unavailableBikes());
+    assertSame(0, bikeContainer.bikeCount());
+    assertSame(1, otherBikeContainer.bikeCount());
   }
 
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class DockingStation {
+public class DockingStation implements Dockable {
 
   private BikeContainer bikeContainer;
 
@@ -30,6 +30,10 @@ public class DockingStation {
 
   public void release(Bike bike) {
     bikeContainer.release(bike);
+  }
+
+  public void transferTo(Dockable otherBikeDocker, ArrayList<Bike> selectedBikes) {
+    bikeContainer.transferTo(otherBikeDocker, selectedBikes);
   }
 
   public ArrayList<Bike> availableBikes() {
